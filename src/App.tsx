@@ -1,25 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Layout from "./components/layout/Layout";
+import Home from "./pages/Home";
+import { BookStoreThemeProvider } from "./context/themeContext";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Error from "./components/common/Error";
+import Signup from "./pages/Signup";
+import ResetPassword from "./pages/ResetPassword";
+import Login from "./pages/Login";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout><Home /></Layout>,
+    errorElement: <Error />
+  },
+  {
+    path: "/books",
+    element: <Layout><div>도서 목록</div></Layout>
+  },
+  {
+    path: "/signup",
+    element: <Layout><Signup /></Layout>
+  },
+  {
+    path: "/reset",
+    element: <Layout><ResetPassword /></Layout>
+  },
+  {
+    path: "/login",
+    element: <Layout><Login /></Layout>
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BookStoreThemeProvider>
+        <RouterProvider router={router} />
+    </BookStoreThemeProvider>
   );
 }
 
