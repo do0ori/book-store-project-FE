@@ -5,13 +5,19 @@ const BASE_URL = "http://localhost:7777/api";
 const DEFAULT_TIMEOUT = 30000;
 
 export const createClient = (config?: AxiosRequestConfig) => {
+    const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+    }
+
+    const token = getToken();
+    if (token) {
+        headers.Authorization = `Bearer ${token}`;
+    }
+
     const axiosInstance = axios.create({
         baseURL: BASE_URL,
         timeout: DEFAULT_TIMEOUT,
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${getToken() ?? ""}`
-        },
+        headers,
         withCredentials: true,
         ...config
     });
@@ -24,7 +30,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
                 window.location.href = "/login";
                 return;
             }
-            Promise.reject(error);
+            // Promise.reject(error);
         }
     );
 
