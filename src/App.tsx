@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import Login from "./pages/Login";
 import Books from "./pages/Books";
+import BookDetail from "./pages/BookDetail";
 
 const router = createBrowserRouter([
   {
@@ -30,12 +31,16 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Layout><Login /></Layout>
   },
+  {
+    path: "/books/:bookId",
+    element: <Layout><BookDetail /></Layout>
+  },
 ]);
 
 function App() {
   return (
     <BookStoreThemeProvider>
-        <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </BookStoreThemeProvider>
   );
 }

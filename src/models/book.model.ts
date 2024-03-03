@@ -11,10 +11,11 @@ export interface Book {
 }
 
 export interface BookDetail extends Book {
+    categoryId: number;
     categoryName: string;
     form: string;
     isbn: string;
-    pages: number;
+    pageCount: number;
     detail: string;
     tableOfContents: string;
 }

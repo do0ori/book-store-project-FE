@@ -10,8 +10,6 @@ import { useBooks } from '../hooks/useBooks';
 function Books() {
     const { books, pagination, isEmpty } = useBooks();
 
-    console.log(books);
-    console.log(pagination);
     return (
         <>
             <Title size="large">도서 검색 결과</Title>
