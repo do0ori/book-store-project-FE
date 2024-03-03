@@ -17,6 +17,8 @@ function BooksFilter() {
             newSearchParams.set(QUERYSTRING.CATEGORY_ID, id.toString());
         }
 
+        newSearchParams.delete(QUERYSTRING.PAGE);
+
         setSearchParams(newSearchParams);
     };
 
@@ -27,6 +29,8 @@ function BooksFilter() {
         } else {
             newSearchParams.set(QUERYSTRING.RECENT, "true");
         }
+
+        newSearchParams.delete(QUERYSTRING.PAGE);
 
         setSearchParams(newSearchParams);
     };
