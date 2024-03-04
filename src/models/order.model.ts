@@ -10,13 +10,19 @@ export interface Order {
 }
 
 export interface OrderSheet {
-    items: number[],
-    delivery: {
-        address: string;
-        recipient: string;
-        contact: string;
-    },
+    items: {
+        cartItemId: number;
+        bookId: number;
+        quantity: number;
+    }[],
+    delivery: Delivery,
     totalPrice: number;
     totalQuantity: number;
     firstBookTitle: string;
+}
+
+export interface Delivery {
+    address: string;
+    recipient: string;
+    contact: string;
 }
