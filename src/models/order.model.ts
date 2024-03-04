@@ -9,6 +9,18 @@ export interface Order {
     totalPrice: number;
 }
 
+export interface OrderDetailItem {
+    bookId: number;
+    title: string;
+    author: string;
+    price: number;
+    quantity: number;
+}
+
+export interface OrderListItem extends Order {
+    detail?: OrderDetailItem[];
+}
+
 export interface OrderSheet {
     items: {
         cartItemId: number;
