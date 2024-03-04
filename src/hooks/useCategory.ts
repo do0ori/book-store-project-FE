@@ -24,7 +24,7 @@ export const useCategory = () => {
 
     useEffect(() => {
         fetchCategory()
-            .then(category => {
+            .then((category) => {
                 if (!category) return;
 
                 const categoryWithAll = [
