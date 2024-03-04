@@ -27,9 +27,8 @@ function Pagination({ pagination }: Props) {
                     <ol>
                         {
                             Array(pages).fill(0).map((_, i) => (
-                                <li>
+                                <li key={i}>
                                     <Button
-                                        key={i}
                                         size="small"
                                         scheme={i + 1 === currentPage ? "primary" : "normal"}
                                         onClick={() => handleClickPage(i + 1)}>
