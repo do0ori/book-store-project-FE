@@ -29,6 +29,10 @@ const CartSummaryStyle = styled.div`
     padding: 12px;
     width: 240px;
 
+    h1 {
+        padding: 0 0 24px 0;
+    }
+
     dl {
         display: flex;
         justify-content: space-between;
