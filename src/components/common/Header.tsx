@@ -22,7 +22,7 @@ function Header() {
                     {
                         category.map((item) => (
                             <li key={item.id}>
-                                <Link to={item.id === null ? '/books' : `/books?category_id=${item.id}`}>
+                                <Link to={item.id === null ? '/books?view=grid' : `/books?view=grid&category_id=${item.id}`}>
                                     {item.name}
                                 </Link>
                             </li>
