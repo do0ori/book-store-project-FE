@@ -8,7 +8,7 @@ import BooksViewSwitcher from '../components/books/BooksViewSwitcher';
 import { useBooks } from '../hooks/useBooks';
 
 function Books() {
-    const { books, pagination, isEmpty } = useBooks();
+    const { books, pagination, isEmpty, isBooksLoading } = useBooks();
 
     return (
         <>
@@ -18,9 +18,9 @@ function Books() {
                     <BooksFilter />
                     <BooksViewSwitcher />
                 </div>
-                {!isEmpty && <BooksList books={books} />}
+                {!isEmpty && books && <BooksList books={books} />}
                 {isEmpty && <BooksEmpty />}
-                {!isEmpty && <Pagination pagination={pagination} />}
+                {!isEmpty && pagination && <Pagination pagination={pagination} />}
             </BooksStyle>
         </>
     );
