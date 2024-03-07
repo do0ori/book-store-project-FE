@@ -1,14 +1,17 @@
-import { BookReviewItem as IBookReviewItem } from '@/models/review.model';
+import { BookReviewItemWrite, BookReviewItem as IBookReviewItem } from '@/models/review.model';
 import styled from 'styled-components';
 import BookReviewItem from './BookReviewItem';
+import BookReviewAdd from './BookReviewAdd';
 
 interface Props {
-    reviews: IBookReviewItem[]
+    reviews: IBookReviewItem[];
+    onAdd: (data: BookReviewItemWrite) => void;
 }
 
-function BookReview({ reviews }: Props) {
+function BookReview({ reviews, onAdd }: Props) {
     return (
         <BookReviewStyle>
+            <BookReviewAdd onAdd={onAdd} />
             {
                 reviews.map((review) => (
                     <BookReviewItem review={review} />

@@ -4,8 +4,8 @@ import { fetchBook, likeBook, unlikeBook } from "../api/books.api";
 import { useAuthStore } from "../store/authStore";
 import { useAlert } from "./useAlert";
 import { addCart } from "../api/carts.api";
-import { BookReviewItem } from "@/models/review.model";
-import { fetchBookReview } from "@/api/review.api";
+import { BookReviewItem, BookReviewItemWrite } from "@/models/review.model";
+import { addBookReview, fetchBookReview } from "@/api/review.api";
 
 export const useBook = (bookId: string | undefined) => {
     const [book, setBook] = useState<BookDetail | null>(null);
@@ -68,5 +68,18 @@ export const useBook = (bookId: string | undefined) => {
             });
     }, [bookId]);
 
-    return { book, likeToggle, addToCart, cartAdded, reviews };
+    const addReview = (data: BookReviewItemWrite) => {
+        if (!book) return;
+
+        addBookReview(book.id.toString(), data)
+            .then(({ message }) => {
+                fetchBookReview(book.id.toString())
+                    .then((reviews) => {
+                        setReviews(reviews);
+                    });
+                showAlert(message);
+            });
+    };
+
+    return { book, likeToggle, addToCart, cartAdded, reviews, addReview };
 };
