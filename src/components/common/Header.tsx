@@ -125,7 +125,8 @@ const HeaderStyle = styled.header`
             display: flex;
             flex-direction: column;
             gap: 16px;
-            width: 100px;
+            width: 120px;
+
             li {
                 a, button {
                     font-size: 1rem;

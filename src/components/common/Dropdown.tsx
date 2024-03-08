@@ -42,7 +42,7 @@ interface DropdownStyleProps {
 const DropdownStyle = styled.div<DropdownStyleProps>`
     position: relative;
 
-    button {
+    .toggle {
         background: none;
         border: none;
         cursor: pointer;
