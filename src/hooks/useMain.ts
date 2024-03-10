@@ -1,4 +1,4 @@
-import { fetchBooks } from "@/api/books.api";
+import { fetchBestBooks, fetchBooks } from "@/api/books.api";
 import { fetchReviewAll } from "@/api/review.api";
 import { Book } from "@/models/book.model";
 import { BookReviewItem } from "@/models/review.model";
@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 export const useMain = () => {
     const [reviews, setReviews] = useState<BookReviewItem[]>([]);
     const [newBooks, setNewBooks] = useState<Book[]>([]);
+    const [bestBooks, setBestBooks] = useState<Book[]>([]);
 
     useEffect(() => {
         fetchReviewAll()
@@ -21,7 +22,12 @@ export const useMain = () => {
         }).then(({ books }) => {
             setNewBooks(books);
         });
+
+        fetchBestBooks()
+            .then((books) => {
+                setBestBooks(books);
+            });
     }, []);
 
-    return { reviews, newBooks };
+    return { reviews, newBooks, bestBooks };
 };
