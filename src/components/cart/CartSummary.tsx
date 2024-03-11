@@ -40,7 +40,22 @@ const CartSummaryStyle = styled.div`
         dd {
             font-weight: 700;
         }
+
     }
-`;
+
+    @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+        width: 100%;
+
+        h1 {
+            padding: 0;
+        }
+
+        dl {
+            dt, dd {
+                font-size: 1rem;
+            }
+        }
+    }
+    `;
 
 export default CartSummary;

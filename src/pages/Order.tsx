@@ -59,7 +59,7 @@ function Order() {
                             <fieldset>
                                 <label>주소</label>
                                 <div className="input">
-                                    <InputText inputType="text" {...register("address", { required: true })} />
+                                    <InputText inputType="text" {...register("address", { required: true })} inputMode="text" />
                                 </div>
                                 <FindAddressButton onCompleted={(address) => setValue("address", address)} />
                             </fieldset>
@@ -67,21 +67,21 @@ function Order() {
                             <fieldset>
                                 <label>상세 주소</label>
                                 <div className="input">
-                                    <InputText inputType="text" {...register("addressDetail", { required: true })} />
+                                    <InputText inputType="text" {...register("addressDetail", { required: true })} inputMode="text" />
                                 </div>
                             </fieldset>
                             {errors.addressDetail && <p className="error-text">상세 주소를 입력해주세요.</p>}
                             <fieldset>
                                 <label>수령인</label>
                                 <div className="input">
-                                    <InputText inputType="text" {...register("recipient", { required: true })} />
+                                    <InputText inputType="text" {...register("recipient", { required: true })} inputMode="text" />
                                 </div>
                             </fieldset>
                             {errors.recipient && <p className="error-text">수령인을 입력해주세요.</p>}
                             <fieldset>
                                 <label>전화번호</label>
                                 <div className="input">
-                                    <InputText inputType="text" {...register("contact", { required: true })} />
+                                    <InputText inputType="text" {...register("contact", { required: true })} inputMode="tel" />
                                 </div>
                             </fieldset>
                             {errors.contact && <p className="error-text">전화번호를 입력해주세요.</p>}
