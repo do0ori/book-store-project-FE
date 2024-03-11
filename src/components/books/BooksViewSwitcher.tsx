@@ -57,6 +57,15 @@ const BooksViewSwitcherStyle = styled.div`
     svg {
         fill: white;
     }
+
+    @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+        gap: 5px;
+
+        button {
+            font-size: 0.75rem;
+            padding: 0.5rem 0.8rem;
+        }
+    }
 `;
 
 export default BooksViewSwitcher;

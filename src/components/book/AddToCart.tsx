@@ -78,6 +78,17 @@ const AddToCartStyle = styled.div<AddToCartStyleProps>`
             margin: 0;
         }
     }
+
+    @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+        input {
+            width: 50%;
+        }
+
+        .added {
+            bottom: 60px;
+            padding: 4px 8px;
+        }
+    }
 `;
 
 export default AddToCart;

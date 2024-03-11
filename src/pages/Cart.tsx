@@ -166,6 +166,29 @@ export const CartStyle = styled.div`
             text-align: right;
         }
     }
+
+    @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 0 0 0;
+
+        button {
+            font-size: 0.75rem;
+            padding: 10px 5px;
+        }
+
+        h1 {
+            font-size: 1rem;
+        }
+
+        p {
+            font-size: 0.8rem;
+        }
+
+        .summary {
+            gap: 12px;
+        }
+    }
 `;
 
 export default Cart;

@@ -149,9 +149,10 @@ const BookDetailStyle = styled.div`
                 }
             }
         }
-    }
 
-    .content {
+        @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+            flex-direction: column;
+        }
     }
 `;
 
