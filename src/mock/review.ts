@@ -23,3 +23,9 @@ export const addReview = http.post("http://localhost:7777/api/reviews/:bookId", 
         status: 200
     });
 });
+
+export const reviewForMain = http.get("http://localhost:7777/api/reviews", () => {
+    return HttpResponse.json(data, {
+        status: 200
+    });
+});

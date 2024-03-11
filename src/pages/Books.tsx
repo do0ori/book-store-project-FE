@@ -10,10 +10,15 @@ import Loading from '@/components/common/Loading';
 import { useBooksInfinite } from '@/hooks/useBooksInfinite';
 import Button from '@/components/common/Button';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
+import { useEffect, useState } from 'react';
 
 function Books() {
     // const { books, pagination, isEmpty, isBooksLoading } = useBooks();
-    const { books, pagination, isEmpty, isBooksLoading, fetchNextPage, hasNextPage } = useBooksInfinite();
+    const { books, pagination, isEmpty, isBooksLoading, fetchNextPage, hasNextPage, scrollPosition } = useBooksInfinite();
+
+    useEffect(() => {
+        window.scrollTo(0, scrollPosition);
+    }, [books]);
 
     const moreRef = useIntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {

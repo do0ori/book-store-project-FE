@@ -3,8 +3,11 @@ import { QUERYSTRING } from "../constants/querystrings";
 import { fetchBooks } from "../api/books.api";
 import { LIMIT } from "../constants/pagination";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 export const useBooksInfinite = () => {
+    const [scrollPosition, setScrollPosition] = useState<number>(0);
+
     const location = useLocation();
 
     const getBooks = ({ pageParam }: { pageParam: number }) => {
@@ -13,6 +16,8 @@ export const useBooksInfinite = () => {
         const recent = params.get(QUERYSTRING.RECENT) ? true : undefined;
         const limit = LIMIT;
         const page = pageParam;
+
+        setScrollPosition(window.scrollY);
 
         return fetchBooks({
             categoryId,
@@ -43,6 +48,7 @@ export const useBooksInfinite = () => {
         isEmpty,
         isBooksLoading: isFetching,
         fetchNextPage,
-        hasNextPage
+        hasNextPage,
+        scrollPosition
     };
 };
