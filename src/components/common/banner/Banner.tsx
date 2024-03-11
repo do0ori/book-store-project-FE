@@ -1,7 +1,7 @@
 import { Banner as IBanner } from '@/models/banner.model';
 import styled from 'styled-components';
 import BannerItem from './BannerItem';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 interface Props {
@@ -9,35 +9,62 @@ interface Props {
 }
 
 function Banner({ banners }: Props) {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(1);
+    const [bannerList, setBannerList] = useState<IBanner[]>([]);
+    const [transition, setTransition] = useState(true);
 
     const transFormValue = useMemo(() => {
         return currentIndex * (-100);
     }, [currentIndex]);
 
+    useEffect(() => {
+        if (banners.length !== 0) {
+            setBannerList([banners[banners.length - 1], ...banners, banners[0]]);
+        }
+    }, [banners]);
+
     const handlePrev = () => {
-        if (currentIndex === 0) return;
-        setCurrentIndex(currentIndex - 1);
+        const newCurrentIndex = currentIndex - 1;
+        setCurrentIndex(newCurrentIndex);
+        setTransition(true);
+
+        if (newCurrentIndex === 0) {
+            jump(banners.length);
+        }
     };
 
     const handleNext = () => {
-        if (currentIndex === banners.length - 1) return;
-        setCurrentIndex(currentIndex + 1);
+        const newCurrentIndex = currentIndex + 1;
+        setCurrentIndex(newCurrentIndex);
+        setTransition(true);
+
+        if (newCurrentIndex === bannerList.length - 1) {
+            jump(1);
+        }
     };
 
     const handleIndicatorClick = (index: number) => {
         setCurrentIndex(index);
+        setTransition(true);
+    };
+
+    const jump = (i: number) => {
+        setTimeout(() => {
+            setTransition(false);
+            setCurrentIndex(i);
+        }, 500);
     };
 
     return (
         <BannerStyle>
-            <BannerContainerStyle $transFormValue={transFormValue}>
+            <BannerContainerStyle $transFormValue={transFormValue} $transition={transition}>
                 {
-                    banners.map((banner) => (
-                        <BannerItem key={banner.id} banner={banner} />
+                    bannerList.map((banner, i) => (
+                        <BannerItem key={i} banner={banner} />
                     ))
                 }
             </BannerContainerStyle>
+
             <BannerButtonStyle>
                 <button className="prev" onClick={handlePrev}>
                     <FaAngleLeft />
@@ -46,12 +73,13 @@ function Banner({ banners }: Props) {
                     <FaAngleRight />
                 </button>
             </BannerButtonStyle>
+
             <BannerIndicatorStyle>
                 {
                     banners.map((_, i) => (
                         <span
-                            className={i === currentIndex ? "active" : ""}
-                            onClick={() => handleIndicatorClick(i)}>
+                            className={i + 1 === currentIndex ? "active" : ""}
+                            onClick={() => handleIndicatorClick(i + 1)}>
                         </span>
                     ))
                 }
@@ -67,12 +95,13 @@ const BannerStyle = styled.div`
 
 interface BannerContainerStyleProps {
     $transFormValue: number;
+    $transition: boolean;
 }
 
 const BannerContainerStyle = styled.div<BannerContainerStyleProps>`
     display: flex;
     transform: translateX(${({ $transFormValue }) => $transFormValue}%);
-    transition: transform 0.5s ease-in-out;
+    transition: ${({ $transition }) => $transition ? "transform 0.5s ease-in-out" : "none"};
 `;
 
 const BannerButtonStyle = styled.div`
