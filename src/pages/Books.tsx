@@ -14,11 +14,7 @@ import { useEffect, useState } from 'react';
 
 function Books() {
     // const { books, pagination, isEmpty, isBooksLoading } = useBooks();
-    const { books, pagination, isEmpty, isBooksLoading, fetchNextPage, hasNextPage, scrollPosition } = useBooksInfinite();
-
-    useEffect(() => {
-        window.scrollTo(0, scrollPosition);
-    }, [books]);
+    const { books, pagination, isEmpty, isBooksLoading, fetchNextPage, hasNextPage } = useBooksInfinite();
 
     const moreRef = useIntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
@@ -35,10 +31,6 @@ function Books() {
         return <BooksEmpty />;
     }
 
-    if (!books || !pagination || isBooksLoading) {
-        return <Loading />;
-    }
-
     return (
         <>
             <Title size="large">도서 검색 결과</Title>
@@ -49,6 +41,8 @@ function Books() {
                 </div>
                 <BooksList books={books} />
                 {/* <Pagination pagination={pagination} /> */}
+
+                {(!books || !pagination || isBooksLoading) && <Loading />}
 
                 <div className="more" ref={moreRef}>
                     <Button size="medium" scheme="normal" onClick={() => fetchNextPage()} disabled={!hasNextPage}>
