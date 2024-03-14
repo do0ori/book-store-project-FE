@@ -38,7 +38,8 @@ export const createClient = (config?: AxiosRequestConfig) => {
                 window.location.href = "/login";
                 return;
             }
-            Promise.reject(error);
+
+            return Promise.reject(error);
         }
     );
 
